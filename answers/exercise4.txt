@@ -1,0 +1,15 @@
+❯ docker start -i clever_chaum
+root@63d2ef41c17f:/# apt-get -y install curl
+Reading package lists... Done
+root@63d2ef41c17f:/# curl -sL https://deb.nodesource.com/setup_24.x | bash
+2026-08-13 11:06:39 - To install N|solid Runtime, run: apt install nsolid -y
+
+root@63d2ef41c17f:/# apt install -y nodejs
+Installing:
+  nodejs
+
+Processing triggers for libc-bin (2.43-2ubuntu2) ...
+root@63d2ef41c17f:/# node usr/src/app/index.js
+Hello World
+root@63d2ef41c17f:/# exit
+exit
