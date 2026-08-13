@@ -1,0 +1,10 @@
+docker run -it ubuntu bash
+root@63d2ef41c17f:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@63d2ef41c17f:/# cd usr
+root@63d2ef41c17f:/usr# cd src
+root@63d2ef41c17f:/usr/src# mkdir app
+root@63d2ef41c17f:/usr/src# cd app
+root@63d2ef41c17f:/usr/src/app# touch index.js
+root@63d2ef41c17f:/usr/src/app# exit
+exit
