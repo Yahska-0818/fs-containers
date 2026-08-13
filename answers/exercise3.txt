@@ -1,0 +1,9 @@
+docker start -i clever_chaum
+root@63d2ef41c17f:/# apt-get update
+Reading package lists... Done
+root@63d2ef41c17f:/# apt-get -y install nano
+Reading package lists... Done
+update-alternatives: warning: skip creation of /usr/share/man/man1/pico.1.gz because associated file /usr/share/man/man1/nano.1.gz (of link group pico) does not exist
+root@63d2ef41c17f:/# nano usr/src/app/index.js
+root@63d2ef41c17f:/# exit
+exit
