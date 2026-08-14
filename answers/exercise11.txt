@@ -1,0 +1,47 @@
+❯ docker compose -f docker-compose.dev.yml up
+[+] up 2/2
+ ✔ Container todo-backend-redis-1 Created                                                                                                                                                                        0.1s
+ ✔ Container todo-backend-mongo-1 Created                                                                                                                                                                        0.2s
+Attaching to mongo-1, redis-1
+redis-1  | Starting Redis Server
+❯ REDIS_URL=redis://localhost:6379 MONGO_URL='mongodb://root:example@localhost:3456/the_database?authSource=admin' npm run dev
+
+> todo-express-backend@0.0.0 dev
+> nodemon ./bin/www
+
+[nodemon] 3.1.14
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node ./bin/www`
+Connected to Redis
+POST /todos 200 43.179 ms - 77
+POST /todos 200 9.484 ms - 84
+❯ docker exec -it todo-backend-redis-1 bash
+root@44c240b6aafc:/data# redis-cli
+127.0.0.1:6379> KEYS added_todos
+1) "added_todos"
+127.0.0.1:6379> GET added_todos
+"1"
+127.0.0.1:6379> SET added_todos 9001
+OK
+127.0.0.1:6379> GET added_todos
+"9001"
+❯ curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"text":"note no 9002","done":true}' \
+  http://localhost:3000/todos
+{"text":"note no 9002","done":false,"_id":"6a7ef48700648e8761903894","__v":0}%
+127.0.0.1:6379> GET added_todos
+"9002"
+127.0.0.1:6379> DEL added_todos
+(integer) 1
+127.0.0.1:6379> GET added_todos
+(nil)
+❯ curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"text":"note after deletion","done":true}' \
+  http://localhost:3000/todos
+{"text":"note after deletion","done":false,"_id":"6a7ef50e00648e8761903896","__v":0}%
+127.0.0.1:6379> GET added_todos
+"1"
