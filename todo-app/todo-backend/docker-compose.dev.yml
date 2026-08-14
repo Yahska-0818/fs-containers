@@ -14,12 +14,12 @@ services:
   redis:
     image: redis
     ports:
-      - 3000:6379
+      - 6379:6379
     command: >
       redis-server
       --save 60 1
       --loglevel warning
-      volumes:
+    volumes:
       - redis_data:/data
 
 volumes:
